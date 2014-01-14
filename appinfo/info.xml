@@ -2,7 +2,7 @@
 <info>
         <id>user_hmac</id>
         <name>HMAC authentication user backend</name>
-        <description>Authenticate users from an external source/portal.
+        <description>Authenticate users from an external source/portal with a HMAC-SHA256 token.
 	The external source uses a private shared key to automatically authenticate
 	an existing user. The private key is shared between the ownCloud server and 
 	the external source/portal. 

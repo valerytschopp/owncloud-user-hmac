@@ -20,17 +20,23 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once OC_App::getAppPath('user_hmac') . '/user_hmac.php';
+class OC_User_HMAC extends OC_User_Backend {
+	protected $user_hmac_key;
 
-OC_APP::registerAdmin('user_hmac', 'settings');
+	public function __construct() {
+		$this->user_hmac_key = OC_Config::getValue( 'user_hmac_key' );
+	}
 
-OC_User::registerBackend('user_hmac');
-OC_User::useBackend('user_hmac');
+	public function checkPassword( $uid, $password ) {
+		$digest = hash_hmac( 'sha256', $uid, $this->user_hmac_key, true );	
+		$hmac = base64_encode( $digest );
+		OC_Log::write('user_hmac', 'uid: ' . $uid . 'password: ' . $password . ' hmac: ' . $hmac, OC_Log::DEBUG);
+		return $hmac == $password;
 
-// add settings page to navigation
-$entry = array(
-        'id' => 'user_hmac_settings',
-        'order' => 1,
-        'href' => OC_Helper::linkTo( 'user_hmac', 'settings.php' ),
-        'name' => 'user_hmac'
-);
+	}
+
+	public function userExists( $uid ){
+		return true;
+	}
+
+}
