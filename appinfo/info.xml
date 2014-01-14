@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<info>
+        <id>user_hmac</id>
+        <name>HMAC authentication user backend</name>
+        <description>Authenticate users from an external source/portal.
+	The external source uses a private shared key to automatically authenticate
+	an existing user. The private key is shared between the ownCloud server and 
+	the external source/portal. 
+        </description>
+        <licence>AGPL</licence>
+        <author>Valery Tschopp</author>
+        <require>4.93</require>
+        <types>
+                <authentication/>
+        </types>
+</info>
