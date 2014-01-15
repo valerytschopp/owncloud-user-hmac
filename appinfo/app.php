@@ -24,8 +24,8 @@ require_once OC_App::getAppPath('user_hmac') . '/user_hmac.php';
 
 OC_APP::registerAdmin('user_hmac', 'settings');
 
-OC_User::registerBackend('user_hmac');
-OC_User::useBackend('user_hmac');
+OC_User::registerBackend('hmac');
+OC_User::useBackend('hmac');
 
 // add settings page to navigation
 $entry = array(
