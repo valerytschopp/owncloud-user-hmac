@@ -1,4 +1,4 @@
 owncloud-user-hmac
 ==================
 
-User HMAC authentication plugin for ownCloud
+ownCloud HMAC user backend to automatically authenticate external users with a HMAC-SHA256 token.
