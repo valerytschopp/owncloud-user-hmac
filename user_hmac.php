@@ -20,17 +20,21 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class OC_User_HMAC extends OC_User_Backend {
+class OC_USER_HMAC extends OC_User_Backend {
 	protected $user_hmac_key;
 
 	public function __construct() {
-		$this->user_hmac_key = OC_Config::getValue( 'user_hmac_key' );
+		$this->user_hmac_key = OCP\Config::getAppValue( 'user_hmac', 'user_hmac_key', 'UNDEFINED!' );
 	}
 
 	public function checkPassword( $uid, $password ) {
+		foreach($_SERVER as $key => $value) {
+			OC_Log::write('user_hmac', 'server: ' . $key . ' = ' . $value, OC_Log::DEBUG);
+		}
 		$digest = hash_hmac( 'sha256', $uid, $this->user_hmac_key, true );	
 		$hmac = base64_encode( $digest );
-		OC_Log::write('user_hmac', 'uid: ' . $uid . 'password: ' . $password . ' hmac: ' . $hmac, OC_Log::DEBUG);
+		//$hmac = hash_hmac( 'sha256', $uid, $this->user_hmac_key, false );
+		OC_Log::write('user_hmac', 'uid: ' . $uid . ' password: ' . $password . ' hmac: ' . $hmac, OC_Log::DEBUG);
 		return $hmac == $password;
 
 	}
