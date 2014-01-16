@@ -31,13 +31,8 @@ class OC_USER_HMAC extends OC_User_Backend {
 	public function checkPassword( $user, $password ) {
 		$hmac = hash_hmac( 'sha256', $user, $this->user_hmac_key, true );	
 		$b64hmac = base64_encode( $hmac );
-		OC_Log::write('user_hmac', 'user: ' . $user . ' password: ' . $password . ' hmac: ' . $b64hmac, OC_Log::DEBUG);
+		OCP\Util::writeLog('user_hmac', 'user: ' . $user . ' password: ' . $password . ' hmac: ' . $b64hmac, OCP\Util::DEBUG);
 		return $b64hmac == $password;
-
-	}
-
-	public function userExists( $uid ){
-		return true;
 	}
 
 }
