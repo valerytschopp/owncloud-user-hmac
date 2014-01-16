@@ -28,7 +28,7 @@ class OC_USER_HMAC extends OC_User_Backend {
 		if ( empty($this->user_hmac_key) ) {
 			$this->user_hmac_key = OC_Util::generateRandomBytes(32);
 			OCP\Config::setAppValue('user_hmac', 'user_hmac_key', $this->user_hmac_key);
-			OCP\Util::writeLog('user_hmac', 'generated HMAC key: ' . $this->user_hmac_key, OCP\Util::INFO);
+			OCP\Util::writeLog('user_hmac', 'Generated HMAC key: ' . $this->user_hmac_key, OCP\Util::INFO);
 		}
 	}
 
