@@ -1,4 +1,4 @@
-DOES NOT WORK YET!
+DOES NOT WORK!
 ===
 
 owncloud-user-hmac
